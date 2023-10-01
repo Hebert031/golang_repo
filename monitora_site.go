@@ -7,9 +7,9 @@ import (
 	"time"
 )
 
-const monitoramento = 5
-const tempo = 7
-const tempo2 = 7
+const monitoramento = 5 // Número de vezes que o monitoramento é executado.
+const tempo = 7         // Tempo de espera entre os ciclos de monitoramento (em segundos).
+const tempo2 = 1        // Tempo de espera entre as verificações individuais dos sites (em segundos).
 
 func main() {
 	// Chama a função exibeIntroducao() para mostrar uma saudação.
