@@ -25,8 +25,8 @@ Digite 1 para iniciar o monitoramento.
 Digite 2 para exibir logs.
 Digite 0 para sair do programa.
 
-    Os resultados do monitoramento serão registrados em um arquivo chamado log.txt.
+Os resultados do monitoramento serão registrados em um arquivo chamado log.txt.
 
-Contribuições
+##Contribuições
 
 Contribuições são bem-vindas! Sinta-se à vontade para abrir problemas (issues) ou enviar solicitações de pull (pull requests) para melhorar este programa.
