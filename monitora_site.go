@@ -67,7 +67,8 @@ func iniciarMonitoramento() {
 	fmt.Println("Monitorando...")
 
 	// Lista de sites a serem monitorados.
-	sites := []string{"http://www.igornetoadv.com.br/", "http://www.theends.com.br", "http://www.casahomecare.com.br", "http://www.hstech.cloud", "http://www.igornetoadv.adv.br/"}
+	sites := []string{"http://www.igornetoadv.com.br/", "http://www.theends.com.br", "http://www.casahomecare.com.br", "http://www.hstech.cloud",
+			  "http://www.igornetoadv.adv.br/"}
 	for i := 0; i < monitoramento; i++ {
 		for i, site := range sites {
 			fmt.Println(i, ":", site)
