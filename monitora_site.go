@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"io"
+	"io/ioutil"
 	"net/http"
 	"os"
 	"strconv"
@@ -32,6 +33,7 @@ func main() {
 		case 2:
 			// Se o comando for 2, exibe logs (ainda não implementado neste código).
 			fmt.Println("Exibindo Logs...")
+			imprimeLogs()
 		case 0:
 			// Se o comando for 0, encerra o programa.
 			fmt.Println("Saindo do programa...")
@@ -151,4 +153,16 @@ func registraLog(site string, status bool) {
 
 	// Fecha o arquivo após a escrita.
 	arquivo.Close()
+}
+
+func imprimeLogs() {
+
+	arquivo, err := ioutil.ReadFile("log.txt")
+
+	if err != nil {
+		// Em caso de erro ao abrir o arquivo, imprime uma mensagem de erro.
+		fmt.Println("Ocorreu um erro:", err)
+	}
+
+	fmt.Println(string(arquivo))
 }
