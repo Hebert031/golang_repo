@@ -1,9 +1,12 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
+	"io"
 	"net/http"
 	"os"
+	"strings"
 	"time"
 )
 
@@ -65,10 +68,7 @@ func leComando() int {
 
 func iniciarMonitoramento() {
 	fmt.Println("Monitorando...")
-
-	// Lista de sites a serem monitorados.
-	sites := []string{"http://www.igornetoadv.com.br/", "http://www.theends.com.br", "http://www.casahomecare.com.br", "http://www.hstech.cloud",
-			  "http://www.igornetoadv.adv.br/"}
+	sites := leSitesDoArquivo()
 	for i := 0; i < monitoramento; i++ {
 		for i, site := range sites {
 			fmt.Println(i, ":", site)
@@ -99,4 +99,37 @@ func testaSite(site string) {
 		// Caso contrário, o site está com algum problema.
 		fmt.Println("Site:", site, "está com problemas. Status Code:", resp.StatusCode)
 	}
+}
+
+func leSitesDoArquivo() []string {
+	// Cria uma slice vazia para armazenar os sites lidos do arquivo.
+	var sites []string
+
+	// Abre o arquivo "sites.txt" para leitura.
+	arquivo, err := os.Open("sites.txt")
+	if err != nil {
+		// Em caso de erro ao abrir o arquivo, imprime uma mensagem de erro.
+		fmt.Println("Ocorreu um erro:", err)
+	}
+
+	// Cria um leitor para ler o arquivo linha por linha.
+	leitor := bufio.NewReader(arquivo)
+
+	// Loop infinito para ler todas as linhas do arquivo.
+	for {
+		// Lê uma linha do arquivo.
+		linha, err := leitor.ReadString('\n')
+		linha = strings.TrimSpace(linha) // Remove espaços em branco e caracteres de nova linha.
+		sites = append(sites, linha)     // Adiciona a linha à slice de sites.
+		if err == io.EOF {
+			// Se chegarmos ao final do arquivo, saímos do loop.
+			break
+		}
+	}
+
+	// Fecha o arquivo após a leitura.
+	arquivo.Close()
+
+	// Retorna a slice contendo os sites lidos do arquivo.
+	return sites
 }
