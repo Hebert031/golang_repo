@@ -20,11 +20,10 @@ Execute o programa:
 shell
 
     go run main.go
-
-    Escolha uma das opções do menu:
-        Digite 1 para iniciar o monitoramento.
-        Digite 2 para exibir logs.
-        Digite 0 para sair do programa.
+Escolha uma das opções do menu:
+Digite 1 para iniciar o monitoramento.
+Digite 2 para exibir logs.
+Digite 0 para sair do programa.
 
     Os resultados do monitoramento serão registrados em um arquivo chamado log.txt.
 
