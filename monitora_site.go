@@ -6,6 +6,7 @@ import (
 	"io"
 	"net/http"
 	"os"
+	"strconv"
 	"strings"
 	"time"
 )
@@ -95,9 +96,11 @@ func testaSite(site string) {
 		// Se o status da resposta for 200, o site está OK.
 		fmt.Println("Site:", site, "foi carregado com sucesso!")
 		fmt.Println(site, ":", resp)
+		registraLog(site, true)
 	} else {
 		// Caso contrário, o site está com algum problema.
 		fmt.Println("Site:", site, "está com problemas. Status Code:", resp.StatusCode)
+		registraLog(site, false)
 	}
 }
 
@@ -132,4 +135,20 @@ func leSitesDoArquivo() []string {
 
 	// Retorna a slice contendo os sites lidos do arquivo.
 	return sites
+}
+
+func registraLog(site string, status bool) {
+	// Abre ou cria o arquivo "log.txt" para escrita, anexando ao final (os.O_APPEND) e com permissão de escrita (0666).
+	arquivo, err := os.OpenFile("log.txt", os.O_CREATE|os.O_RDWR|os.O_APPEND, 0666)
+
+	if err != nil {
+		// Em caso de erro ao abrir ou criar o arquivo, imprime uma mensagem de erro.
+		fmt.Println("Ocorreu um erro:", err)
+	}
+
+	// Escreve uma linha no arquivo de log no formato "site - online: true/false".
+	arquivo.WriteString(time.Now().Format("02/01/2006 15:04:05") + " - " + site + " - online: " + strconv.FormatBool(status) + "\n")
+
+	// Fecha o arquivo após a escrita.
+	arquivo.Close()
 }
